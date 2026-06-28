@@ -12,7 +12,8 @@
   "scripts": {
     "build:tokens": "node scripts/build-tokens.mjs",
     "build": "npm run build:tokens && vite build",
-    "dev": "npm run build:tokens && vite"
+    "dev": "npm run build:tokens && vite",
+    "prepare": "npm run build"
   },
   "peerDependencies": {
     "react": ">=18",
