@@ -1,0 +1,11 @@
+/* 자동 생성 — design-tokens.json SSoT에서. 직접 수정 금지 (npm run build:tokens). */
+:root {
+  --i7-primary: #00754A;
+  --i7-surface: #f2f0eb;
+  --i7-text-main: rgba(0,0,0,0.87);
+  --i7-text-sec: rgba(0,0,0,0.64);
+  --i7-success: #006241;
+  --i7-danger: #c82014;
+  --i7-warning: #c2410c;
+  --i7-border: #e7e3db;
+}

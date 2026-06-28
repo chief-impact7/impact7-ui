@@ -1,0 +1,31 @@
+/* 토큰(--i7-*) 기반 버튼. 색·테두리는 전부 SSoT 토큰을 참조 → 4앱 디자인과 자동 일치. */
+.i7-btn {
+  font: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+.i7-btn--primary {
+  background: var(--i7-primary);
+  color: #fff;
+}
+.i7-btn--secondary {
+  background: var(--i7-surface);
+  color: var(--i7-text-main);
+  border-color: var(--i7-border);
+}
+.i7-btn--danger {
+  background: var(--i7-danger);
+  color: #fff;
+}
+.i7-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

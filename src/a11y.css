@@ -1,0 +1,18 @@
+/* 공통 접근성 규칙 — DSC a11y.css와 동일 보편 규칙(에코시스템 일관).
+   라이브러리 토큰(--i7-primary) 기준, 미정의 앱 대비 Starbucks 그린 fallback. */
+:focus-visible {
+  outline: 2px solid var(--i7-primary, #00754A);
+  outline-offset: 2px;
+}
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
