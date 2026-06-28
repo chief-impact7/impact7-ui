@@ -8,14 +8,29 @@
 //   handle.unmount();                 // 영역 제거 시 정리(메모리 누수 방지)
 import { createElement } from 'react';
 import { createRoot } from 'react-dom/client';
+// 이 CSS import는 라이브러리 빌드 시 styles.css로 추출된다(번들 JS엔 안 들어감).
+// 따라서 소비 앱은 전역에 `@impact7/ui/styles.css`를 1회 별도 로드해야 스타일이 적용된다.
 import './tokens.css';
 import './a11y.css';
 
+// 같은 el에 createRoot를 두 번 만들면 React 경고 + root 누수가 나므로 el→root를 캐시해 멱등화.
+const roots = new WeakMap();
+
 export function mount(el, Component, props = {}) {
-  const root = createRoot(el);
+  let root = roots.get(el);
+  if (!root) {
+    root = createRoot(el);
+    roots.set(el, root);
+  }
   root.render(createElement(Component, props));
   return {
-    update: (nextProps) => root.render(createElement(Component, nextProps)),
-    unmount: () => root.unmount(),
+    update: (nextProps) => {
+      if (roots.has(el)) root.render(createElement(Component, nextProps)); // unmount 후 호출 무시
+    },
+    unmount: () => {
+      if (!roots.has(el)) return;
+      roots.delete(el);
+      root.unmount();
+    },
   };
 }
