@@ -4,3 +4,6 @@ import './tokens.css';
 import './a11y.css';
 
 export { Button } from './Button/Button.jsx';
+export { Icon } from './Icon/Icon.jsx';
+export { ICON_PATHS } from './Icon/icons.js';
+export { IconButton } from './IconButton/IconButton.jsx';
