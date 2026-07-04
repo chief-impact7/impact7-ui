@@ -93,6 +93,7 @@ export type IconName =
   | 'sparkles'
   | 'squares2x2'
   | 'squaresPlus'
+  | 'sun'
   | 'tableCells'
   | 'tag'
   | 'trash'
