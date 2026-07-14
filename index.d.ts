@@ -5,7 +5,7 @@ import type { JSX } from 'react';
 import type { IconName } from './icons';
 
 export type { IconName };
-export { ICON_PATHS } from './icons';
+export { ICON_PATHS, ICON_SVGS } from './icons';
 
 export declare function Icon(
   props: { name: IconName; size?: number } & SVGProps<SVGSVGElement>

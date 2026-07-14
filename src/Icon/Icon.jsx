@@ -1,24 +1,19 @@
-import { ICON_PATHS } from './icons.js';
+import { ICON_SVGS } from './phosphor-icons.js';
 
 /**
- * Heroicons outline 24px 아이콘. 색은 currentColor를 따른다.
- * @param {{name: keyof typeof ICON_PATHS, size?: number, [k:string]: any}} props
+ * Phosphor Duotone 아이콘. 색은 currentColor를 따른다.
+ * @param {{name: keyof typeof ICON_SVGS, size?: number, [k:string]: any}} props
  */
 export function Icon({ name, size = 20, ...props }) {
   return (
     <svg
-      viewBox="0 0 24 24"
+      viewBox="0 0 256 256"
       width={size}
       height={size}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={1.5}
-      strokeLinecap="round"
-      strokeLinejoin="round"
+      fill="currentColor"
       aria-hidden="true"
       {...props}
-    >
-      <path d={ICON_PATHS[name]} />
-    </svg>
+      dangerouslySetInnerHTML={{ __html: ICON_SVGS[name] || '' }}
+    />
   );
 }

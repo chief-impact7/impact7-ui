@@ -39,7 +39,7 @@ handle.unmount();                                       // 영역 제거 시 정
 ## 아이콘
 
 - 사용자 화면의 제목·버튼·탭·상태·안내문에는 이모지나 유니코드 그림문자를 아이콘으로 사용하지 않는다.
-- `Icon` 또는 `@impact7/ui/icons`의 Heroicons Outline만 사용한다. 필요한 아이콘은 앱별로 혼용하지 않고 이 패키지의 `ICON_PATHS`에 추가한다.
+- `Icon` 또는 `@impact7/ui/icons`의 Phosphor Duotone만 사용한다. 필요한 아이콘은 앱별로 혼용하지 않고 이 패키지의 공용 이름에 추가한다.
 
 ## 토큰
 `--i7-*` (primary/surface/text-main/text-sec/success/danger/warning/border)는

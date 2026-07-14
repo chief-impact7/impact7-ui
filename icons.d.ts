@@ -1,5 +1,4 @@
-// './icons' 서브패스(React-free) 타입 선언 — Svelte·바닐라 앱은 이 파일만 참조한다.
-// index.d.ts(React 컴포넌트용)가 IconName을 여기서 재사용해 SSoT를 하나로 유지.
+// npm run build:icons로 생성. 직접 편집하지 않는다.
 export type IconName =
   | 'academicCap'
   | 'adjustmentsHorizontal'
@@ -111,6 +110,8 @@ export type IconName =
   | 'xCircle'
   | 'xMark';
 
+export declare const ICON_SVGS: Record<IconName, string>;
+/** @deprecated 새 코드는 ICON_SVGS 또는 iconSvg를 사용한다. */
 export declare const ICON_PATHS: Record<IconName, string>;
 
 export declare function iconSvg(

@@ -7,14 +7,15 @@
 // 액션 규약(에코시스템 공통): pencil=수정, trash=삭제, xMark=닫기, link=링크 복사, download=다운로드.
 // 돈이 움직이는 액션(확정·발행·환불 등)은 아이콘 금지 — 텍스트 버튼 유지.
 export { ICON_PATHS } from './Icon/icons.js';
-import { ICON_PATHS } from './Icon/icons.js';
+export { ICON_SVGS } from './Icon/phosphor-icons.js';
+import { ICON_SVGS } from './Icon/phosphor-icons.js';
 
-/** Heroicons outline SVG 문자열. 색은 currentColor, aria-hidden — 라벨은 감싸는 버튼에 붙일 것. */
-export function iconSvg(name, { size = 16, strokeWidth = 1.5, className = '' } = {}) {
-  const path = ICON_PATHS[name];
-  if (!path) throw new Error(`unknown icon: ${name}`);
+/** Phosphor Duotone SVG 문자열. 색은 currentColor, aria-hidden — 라벨은 감싸는 버튼에 붙일 것. */
+export function iconSvg(name, { size = 16, className = '' } = {}) {
+  const body = ICON_SVGS[name];
+  if (!body) throw new Error(`unknown icon: ${name}`);
   const cls = className ? ` class="${className}"` : '';
-  return `<svg${cls} viewBox="0 0 24 24" width="${size}" height="${size}" fill="none" stroke="currentColor" stroke-width="${strokeWidth}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${path}"/></svg>`;
+  return `<svg${cls} viewBox="0 0 256 256" width="${size}" height="${size}" fill="currentColor" aria-hidden="true">${body}</svg>`;
 }
 
 /**
