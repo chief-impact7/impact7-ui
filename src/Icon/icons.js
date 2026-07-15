@@ -221,3 +221,26 @@ export const ICON_PATHS = {
   folder:
     'M2.25 12.75V12A2.25 2.25 0 0 1 4.5 9.75h15A2.25 2.25 0 0 1 21.75 12v.75m-8.69-6.44-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z',
 };
+
+Object.assign(ICON_PATHS, {
+  arrowClockwise: ICON_PATHS.arrowPath,
+  arrowCounterClockwise: ICON_PATHS.arrowPath,
+  brain: ICON_PATHS.cpuChip,
+  camera: ICON_PATHS.photo,
+  chartLineUp: ICON_PATHS.arrowTrendingUp,
+  exam: ICON_PATHS.documentText,
+  eye: ICON_PATHS.magnifier,
+  filePdf: ICON_PATHS.documentText,
+  floppyDisk: ICON_PATHS.arrowDownOnSquare,
+  googleDrive: ICON_PATHS.cloudArrowUp,
+  hourglass: ICON_PATHS.clock,
+  lock: ICON_PATHS.shieldCheck,
+  magnifyingGlassMinus: ICON_PATHS.magnifier,
+  magnifyingGlassPlus: ICON_PATHS.magnifier,
+  minus: ICON_PATHS.xMark,
+  minusCircle: ICON_PATHS.xCircle,
+  musicNotes: ICON_PATHS.playCircle,
+  paperclip: ICON_PATHS.link,
+  photos: ICON_PATHS.photo,
+  play: ICON_PATHS.playCircle,
+});
