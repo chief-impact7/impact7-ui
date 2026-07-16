@@ -2,6 +2,7 @@
 // 소비 앱은 `import '@impact7/ui/styles.css'`를 전역에 1회 별도 로드해야 스타일이 적용된다.
 import './tokens.css';
 import './a11y.css';
+import './tooltip.css';
 
 export { Button } from './Button/Button.jsx';
 export { Icon } from './Icon/Icon.jsx';

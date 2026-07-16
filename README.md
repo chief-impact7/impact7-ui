@@ -33,8 +33,16 @@ handle.unmount();                                       // 영역 제거 시 정
 
 ## 컴포넌트
 - `Button` — `variant: 'primary' | 'secondary' | 'danger'`
+- `Icon` — `name: IconName, size?` (Phosphor Duotone)
+- `IconButton` — `icon, label, tone?: 'danger', size?` — label이 aria-label + CSS 툴팁으로 노출
 
 (로드맵: Badge · Card · Modal · Input — 점진 추가)
+
+## 버튼 규약
+- 액션 버튼은 **가급적 `IconButton`(아이콘 + 툴팁)** 을 쓴다. 글씨 버튼보다 아이콘 우선.
+- 텍스트 `Button`은 돈이 움직이는 액션(확정·발행·환불 등)과 주요 폼 제출(저장·전송)에만 유지한다.
+- 툴팁은 `data-i7-tip` 속성으로 어떤 요소에든 붙일 수 있다 (hover/focus-visible 시 표시).
+  터치 기기에선 툴팁이 안 뜨므로 아이콘 자체가 의미를 전달해야 한다 — 액션 규약의 표준 아이콘을 따를 것.
 
 ## 아이콘
 
