@@ -9,3 +9,5 @@ export { Icon } from './Icon/Icon.jsx';
 export { ICON_PATHS } from './Icon/icons.js';
 export { ICON_SVGS } from './Icon/phosphor-icons.js';
 export { IconButton } from './IconButton/IconButton.jsx';
+export { Modal } from './Modal/Modal.jsx';
+export { Badge } from './Badge/Badge.jsx';

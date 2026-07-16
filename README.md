@@ -35,8 +35,10 @@ handle.unmount();                                       // 영역 제거 시 정
 - `Button` — `variant: 'primary' | 'secondary' | 'danger'`
 - `Icon` — `name: IconName, size?` (Phosphor Duotone)
 - `IconButton` — `icon, label, tone?: 'danger', size?` — label이 aria-label + CSS 툴팁으로 노출
+- `Modal` — `open, onClose, title?, children, footer?` — 네이티브 `<dialog>` 기반. `open`이 showModal()/close()를 구동하고 ESC·배경 클릭 모두 `onClose`로 수렴. `title` 생략 시 헤더(제목+닫기 버튼)를 그리지 않는다 — 소비 화면이 자체 헤더를 그릴 때 사용. 데스크톱 센터(max-width 640px) / 모바일(<768px) 풀스크린 전환 내장
+- `Badge` — `tone?: 'active'|'scheduled'|'paused'|'consult'|'ended-hard'|'ended-soft'|'neutral'|'danger'|'warning'` — `@impact7/shared/enrollment-status`의 `STATUS_TONE` 값과 그대로 호환되는 톤 컬러 칩
 
-(로드맵: Badge · Card · Modal · Input — 점진 추가)
+(로드맵: Card · Input — 점진 추가)
 
 ## 버튼 규약
 - 액션 버튼은 **가급적 `IconButton`(아이콘 + 툴팁)** 을 쓴다. 글씨 버튼보다 아이콘 우선.

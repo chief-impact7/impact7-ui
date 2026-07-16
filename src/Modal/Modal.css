@@ -1,0 +1,63 @@
+/* 네이티브 <dialog> 기반 공유 모달. 핵심 토큰(--i7-surface·text-main·border)은 SSoT에 있어
+   폴백 없이 직접 참조하고(Button.css 관례), SSoT에 없는 확장 토큰(그림자)만 폴백을 둔다. */
+.i7-modal {
+  display: flex;
+  flex-direction: column;
+  width: 640px;
+  max-width: 92vw;
+  max-height: 85vh;
+  padding: 0;
+  border: none;
+  border-radius: 8px;
+  background: var(--i7-surface);
+  color: var(--i7-text-main);
+  box-shadow: var(--i7-modal-shadow, 0 10px 40px rgba(0, 0, 0, 0.18));
+}
+
+.i7-modal::backdrop {
+  background: rgba(0, 0, 0, 0.32);
+}
+
+.i7-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--i7-border);
+  flex-shrink: 0;
+}
+
+.i7-modal__title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.i7-modal__content {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.i7-modal__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 12px 16px;
+  border-top: 1px solid var(--i7-border);
+  flex-shrink: 0;
+}
+
+/* 모바일은 중앙 모달이 아니라 풀스크린 전환 — 좁은 화면에서 640px 중앙 모달은 여백만 차지하고
+   내부 스크롤 영역이 좁아져 입력·피커 UX가 나빠지기 때문(AppModal 임시 구현에서 승격). */
+@media (max-width: 767px) {
+  .i7-modal {
+    width: 100vw;
+    height: 100dvh;
+    max-width: 100vw;
+    max-height: 100dvh;
+    margin: 0;
+    border-radius: 0;
+  }
+}

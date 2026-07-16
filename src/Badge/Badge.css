@@ -1,0 +1,41 @@
+/* 톤별 저채도 배경 틴트 — --i7-* 핵심 토큰은 직접, 틴트 배경은 SSoT에 없는 확장 토큰이라
+   --i7-*-bg 폴백 패턴(hex 금지, rgba는 해당 톤 hex의 실제 RGB를 그대로 옮긴 값). */
+.i7-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.i7-badge--active {
+  color: var(--i7-success);
+  background: var(--i7-success-bg, rgba(0, 98, 65, 0.09));
+}
+
+.i7-badge--scheduled {
+  color: var(--i7-primary);
+  background: var(--i7-primary-bg, rgba(0, 117, 74, 0.09));
+}
+
+.i7-badge--paused,
+.i7-badge--consult,
+.i7-badge--warning {
+  color: var(--i7-warning);
+  background: var(--i7-warning-bg, rgba(194, 65, 12, 0.1));
+}
+
+.i7-badge--ended-hard,
+.i7-badge--ended-soft,
+.i7-badge--neutral {
+  color: var(--i7-text-sec);
+  background: var(--i7-surface);
+}
+
+.i7-badge--danger {
+  color: var(--i7-danger);
+  background: var(--i7-danger-bg, rgba(200, 32, 20, 0.1));
+}
