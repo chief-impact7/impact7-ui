@@ -15,7 +15,7 @@
 }
 
 .i7-modal::backdrop {
-  background: rgba(0, 0, 0, 0.32);
+  background: var(--i7-modal-backdrop, rgba(0, 0, 0, 0.32));
 }
 
 .i7-modal__header {
