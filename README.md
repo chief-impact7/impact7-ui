@@ -49,7 +49,10 @@ handle.unmount();                                       // 영역 제거 시 정
 ## 아이콘
 
 - 사용자 화면의 제목·버튼·탭·상태·안내문에는 이모지나 유니코드 그림문자를 아이콘으로 사용하지 않는다.
-- `Icon` 또는 `@impact7/ui/icons`의 Phosphor Duotone만 사용한다. 필요한 아이콘은 앱별로 혼용하지 않고 이 패키지의 공용 이름에 추가한다.
+- `Icon` 또는 `@impact7/ui/icons`의 Phosphor Duotone만 사용한다.
+- **Phosphor Duotone 전 세트(1500+)를 원본 슬러그로 바로 쓸 수 있다** — [phosphoricons.com](https://phosphoricons.com)의 이름을 kebab-case 그대로: `<Icon name="graduation-cap" />`, `iconSvg('chart-line-up')`.
+- 기존 Heroicons 이름(`academicCap`·`arrowLeft` 등)은 하위호환 alias로 계속 동작한다. 신규 코드는 Phosphor 슬러그를 권장.
+- 매핑은 `scripts/build-icons.mjs`가 `@phosphor-icons/core`에서 생성한다 (`npm run build:icons`) — alias는 `src/Icon/phosphor-icon-names.js`에서 관리.
 
 ## 토큰
 `--i7-*` (primary/surface/text-main/text-sec/success/danger/warning/border)는
