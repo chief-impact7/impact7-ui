@@ -6,7 +6,7 @@ import { dirname, join } from 'node:path';
 
 const here = dirname(fileURLToPath(import.meta.url));
 // SSoT는 impact7DB/.agents에 있다(허브, 로컬 절대경로). 부재 시 마지막 생성본 유지.
-const SSOT = '/Users/jongsooyi/projects/impact7DB/.agents/design-tokens.json';
+const SSOT = '/Users/jongsooyi/IMPACT7/impact7DB/.agents/design-tokens.json';
 
 let tokens;
 try {
