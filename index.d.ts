@@ -8,7 +8,7 @@ export type { IconName };
 export { ICON_PATHS, ICON_SVGS } from './icons';
 
 export declare function Icon(
-  props: { name: IconName; size?: number } & SVGProps<SVGSVGElement>
+  props: { name: IconName; size?: number; flat?: boolean } & SVGProps<SVGSVGElement>
 ): JSX.Element;
 
 export declare function IconButton(

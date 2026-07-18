@@ -3,6 +3,7 @@ import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import { PHOSPHOR_ICON_NAMES } from '../src/Icon/phosphor-icon-names.js';
 import { ICON_PATHS, ICON_SVGS, iconSvg } from '../src/icons-entry.js';
+import { stripBackdrop } from '../src/Icon/flat.js';
 
 test('Phosphor Duotone 전체 + Heroicons alias가 렌더링된다', () => {
   // Phosphor duotone 전체(1500+)를 원본 슬러그로 노출한다.
@@ -35,6 +36,16 @@ test('Phosphor Duotone 전체 + Heroicons alias가 렌더링된다', () => {
   const bodies = Object.values(ICON_SVGS);
   const duotone = bodies.filter((b) => /opacity="0.2"/.test(b)).length;
   assert.ok(duotone / bodies.length > 0.99, `duotone 마커 비율 ${duotone}/${bodies.length}`);
+});
+
+test('flat 옵션은 배경층(opacity=0.2)만 제거하고 전경 path는 남긴다', () => {
+  const full = ICON_SVGS['graduation-cap'];
+  assert.match(full, /opacity="0.2"/);
+  const flat = stripBackdrop(full);
+  assert.doesNotMatch(flat, /opacity="0.2"/); // 배경층 제거
+  assert.match(flat, /<path\b/); // 전경 path는 유지
+  assert.match(iconSvg('graduation-cap', { flat: true }), /viewBox="0 0 256 256"/);
+  assert.doesNotMatch(iconSvg('graduation-cap', { flat: true }), /opacity="0.2"/);
 });
 
 test('공유 React 번들은 production JSX runtime만 사용한다', async () => {
