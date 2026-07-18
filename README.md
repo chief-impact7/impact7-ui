@@ -54,6 +54,29 @@ handle.unmount();                                       // 영역 제거 시 정
 - 기존 Heroicons 이름(`academicCap`·`arrowLeft` 등)은 하위호환 alias로 계속 동작한다. 신규 코드는 Phosphor 슬러그를 권장.
 - 매핑은 `scripts/build-icons.mjs`가 `@phosphor-icons/core`에서 생성한다 (`npm run build:icons`) — alias는 `src/Icon/phosphor-icon-names.js`에서 관리.
 
+### flat(단색) 옵션
+Duotone은 옅은 배경층(`opacity="0.2"`) + 전경 두 겹이다. 원형 배지 등 색이 있는 배경 위에 얹으면
+배경층이 비쳐 보인다. `flat`을 주면 배경층을 제거해 단색으로 렌더한다(이미 단색인 아이콘은 그대로).
+```jsx
+<Icon name="check-circle" flat />
+```
+```js
+iconSvg('check-circle', { flat: true });
+iconButtonHtml({ icon: 'trash', label: '삭제', flat: true });
+```
+
+### tree-shakeable 개별 import (크기 민감 소비자)
+`name` 동적 조회 API(`Icon`·`iconSvg`)는 이름을 런타임에 고르므로 **전체 아이콘 맵(~918KB)을
+번들할 수밖에 없다 — 설계상 불가피**. 정적 이름만 쓴다면 개별 named export를 import해서
+사용한 것만 번들에 넣을 수 있다(bundler가 나머지를 tree-shake). 값은 SVG **body 문자열**이다.
+```js
+import { arrowLeft, checkCircle } from '@impact7/ui/icons/named';
+el.innerHTML = `<svg viewBox="0 0 256 256" width="20" fill="currentColor">${arrowLeft}</svg>`;
+```
+- 이름은 camelCase 식별자(`arrow-left`·`arrowLeft` 둘 다 `arrowLeft`로 수렴). JS 예약어·숫자 시작
+  슬러그는 `_` 프리픽스(`export`→`_export`, `function`→`_function`, `package`→`_package`).
+- 검증: 한 개만 import하면 237B, 전체(`import *`)는 ~890KB — 나머지 1582개는 번들에 안 들어간다.
+
 ## 토큰
 `--i7-*` (primary/surface/text-main/text-sec/success/danger/warning/border)는
 `scripts/build-tokens.mjs`가 SSoT에서 생성한다. **토큰 값은 SSoT(design-tokens.json)에서만

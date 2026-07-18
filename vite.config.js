@@ -12,6 +12,7 @@ export default defineConfig({
         'impact7-ui': resolve(__dirname, 'src/index.js'),
         mount: resolve(__dirname, 'src/mount.js'),
         icons: resolve(__dirname, 'src/icons-entry.js'),
+        'icons-named': resolve(__dirname, 'src/Icon/icons-named.js'),
       },
       formats: ['es'],
     },

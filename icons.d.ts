@@ -1614,7 +1614,7 @@ export declare const ICON_PATHS: Record<string, string>;
 
 export declare function iconSvg(
   name: IconName,
-  options?: { size?: number; strokeWidth?: number; className?: string }
+  options?: { size?: number; strokeWidth?: number; className?: string; flat?: boolean }
 ): string;
 
 export declare function iconButtonHtml(options: {
@@ -1624,4 +1624,5 @@ export declare function iconButtonHtml(options: {
   size?: number;
   className?: string;
   attrs?: string;
+  flat?: boolean;
 }): string;

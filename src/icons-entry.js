@@ -9,13 +9,18 @@
 export { ICON_PATHS } from './Icon/icons.js';
 export { ICON_SVGS } from './Icon/phosphor-icons.js';
 import { ICON_SVGS } from './Icon/phosphor-icons.js';
+import { stripBackdrop } from './Icon/flat.js';
 
-/** Phosphor Duotone SVG 문자열. 색은 currentColor, aria-hidden — 라벨은 감싸는 버튼에 붙일 것. */
-export function iconSvg(name, { size = 16, className = '' } = {}) {
+/**
+ * Phosphor Duotone SVG 문자열. 색은 currentColor, aria-hidden — 라벨은 감싸는 버튼에 붙일 것.
+ * flat=true면 옅은 배경층을 제거해 단색으로 렌더.
+ */
+export function iconSvg(name, { size = 16, className = '', flat = false } = {}) {
   const body = ICON_SVGS[name];
   if (!body) throw new Error(`unknown icon: ${name}`);
   const cls = className ? ` class="${className}"` : '';
-  return `<svg${cls} viewBox="0 0 256 256" width="${size}" height="${size}" fill="currentColor" aria-hidden="true">${body}</svg>`;
+  const inner = flat ? stripBackdrop(body) : body;
+  return `<svg${cls} viewBox="0 0 256 256" width="${size}" height="${size}" fill="currentColor" aria-hidden="true">${inner}</svg>`;
 }
 
 /**
@@ -23,8 +28,8 @@ export function iconSvg(name, { size = 16, className = '' } = {}) {
  * 소비 앱은 `@impact7/ui/styles.css`를 로드하거나 자체 스타일로 i7-icon-btn을 정의해야 한다.
  * label은 aria-label·title(툴팁)로 들어간다. 핸들러는 attrs(onclick·data-*)로 전달.
  */
-export function iconButtonHtml({ icon, label, tone, size = 16, className = '', attrs = '' }) {
+export function iconButtonHtml({ icon, label, tone, size = 16, className = '', attrs = '', flat = false }) {
   const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
   const cls = `i7-icon-btn${tone === 'danger' ? ' i7-icon-btn--danger' : ''}${className ? ` ${className}` : ''}`;
-  return `<button type="button" class="${cls}" aria-label="${esc(label)}" title="${esc(label)}" ${attrs}>${iconSvg(icon, { size })}</button>`;
+  return `<button type="button" class="${cls}" aria-label="${esc(label)}" title="${esc(label)}" ${attrs}>${iconSvg(icon, { size, flat })}</button>`;
 }
