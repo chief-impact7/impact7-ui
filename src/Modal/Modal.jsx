@@ -3,8 +3,9 @@ import './Modal.css';
 import { IconButton } from '../IconButton/IconButton.jsx';
 
 /**
- * 네이티브 <dialog> 기반 공유 모달. open이 true일 때만 마운트되어 showModal()을 걸고,
- * false로 바뀌면 언마운트되며 close()가 정리된다(ESC·배경 클릭 등 어떤 경로로 닫혀도 동일).
+ * 네이티브 <dialog> 기반 공유 모달. open이 true가 되면 showModal()을 걸고,
+ * false로 바뀌면 close()가 정리된다(ESC·배경 클릭 등 어떤 경로로 닫혀도 동일).
+ * 컴포넌트가 open=false로 선마운트돼 있어도 동작한다 — effect가 open 전환에 반응한다.
  * title 없으면 헤더(제목+닫기 버튼)를 생략한다 — 소비 화면이 자체 헤더(브레드크럼·액션 등)를
  * 그리고 싶을 때 children에 직접 넣을 수 있도록.
  * @param {{open: boolean, onClose: () => void, title?: string, children?: any, footer?: any}} props
@@ -18,6 +19,9 @@ export function Modal({ open, onClose, title, children, footer }) {
   }, [onClose]);
 
   useEffect(() => {
+    // deps 없는 1회 effect였을 때 open=false 선마운트 인스턴스는 dialog ref 없이 조기 종료해
+    // 이후 open=true가 돼도 showModal이 영영 안 불렸다 — open 전환마다 재실행해야 한다.
+    if (!open) return;
     const dialog = ref.current;
     if (!dialog) return;
     // ESC(native cancel→close) 등 어떤 경로로 닫혀도 React 상태를 맞춘다.
@@ -29,7 +33,7 @@ export function Modal({ open, onClose, title, children, footer }) {
       dialog.removeEventListener('close', handleClose);
       dialog.close();
     };
-  }, []);
+  }, [open]);
 
   function handleBackdropClick(e) {
     // 클릭 대상이 dialog 자신이면(자식이 아니면) 배경(::backdrop) 클릭으로 간주.
