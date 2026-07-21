@@ -5,15 +5,17 @@ import type { JSX } from 'react';
 import type { IconName } from './icons';
 
 export type { IconName };
-export { ICON_PATHS, ICON_SVGS } from './icons';
+// ICON_SVGS(전체 Phosphor 맵)는 메인 엔트리에서 재수출하지 않는다 — 필요하면 '@impact7/ui/icons'에서.
+export { ICON_PATHS } from './icons';
 
 export declare function Icon(
-  props: { name: IconName; size?: number; flat?: boolean } & SVGProps<SVGSVGElement>
+  props: { name?: IconName; svg?: string; size?: number; flat?: boolean } & SVGProps<SVGSVGElement>
 ): JSX.Element;
 
 export declare function IconButton(
   props: {
-    icon: IconName;
+    icon?: IconName;
+    svg?: string;
     label: string;
     tone?: 'danger';
     size?: number;
