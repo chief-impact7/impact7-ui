@@ -33,8 +33,8 @@ handle.unmount();                                       // 영역 제거 시 정
 
 ## 컴포넌트
 - `Button` — `variant: 'primary' | 'secondary' | 'danger'`
-- `Icon` — `name: IconName, size?` (Phosphor Duotone)
-- `IconButton` — `icon, label, tone?: 'danger', size?` — label이 aria-label + CSS 툴팁으로 노출
+- `Icon` — `name?: IconName, svg?: string, size?, flat?` (Phosphor Duotone). `svg`가 있으면 `name`은 무시되고 맵 조회 없이 동기 렌더된다.
+- `IconButton` — `icon?, svg?, label, tone?: 'danger', size?` — label이 aria-label + CSS 툴팁으로 노출
 - `Modal` — `open, onClose, title?, children, footer?` — 네이티브 `<dialog>` 기반. `open`이 showModal()/close()를 구동하고 ESC·배경 클릭 모두 `onClose`로 수렴. `title` 생략 시 헤더(제목+닫기 버튼)를 그리지 않는다 — 소비 화면이 자체 헤더를 그릴 때 사용. 데스크톱 센터(max-width 640px) / 모바일(<768px) 풀스크린 전환 내장
 - `Badge` — `tone?: 'active'|'scheduled'|'paused'|'consult'|'ended-hard'|'ended-soft'|'neutral'|'danger'|'warning'` — `@impact7/shared/enrollment-status`의 `STATUS_TONE` 값과 그대로 호환되는 톤 컬러 칩
 
@@ -66,12 +66,22 @@ iconButtonHtml({ icon: 'trash', label: '삭제', flat: true });
 ```
 
 ### tree-shakeable 개별 import (크기 민감 소비자)
-`name` 동적 조회 API(`Icon`·`iconSvg`)는 이름을 런타임에 고르므로 **전체 아이콘 맵(~918KB)을
-번들할 수밖에 없다 — 설계상 불가피**. 정적 이름만 쓴다면 개별 named export를 import해서
-사용한 것만 번들에 넣을 수 있다(bundler가 나머지를 tree-shake). 값은 SVG **body 문자열**이다.
+`iconSvg`(바닐라 `@impact7/ui/icons` 엔트리)는 이름을 런타임에 고르므로 **전체 아이콘 맵(~918KB)을
+번들할 수밖에 없다 — 설계상 불가피**. 반면 `Icon`의 `name` prop은 전체 맵을 동적 import로
+지연 로드하므로 초기 번들엔 들어가지 않는다(최초 렌더 후 비동기 청크로 받아온다).
+
+정적 이름만 쓴다면 개별 named export를 import해서 사용한 것만 번들에 넣을 수 있다(bundler가
+나머지를 tree-shake). 값은 SVG **body 문자열**이며, React에선 `Icon`의 `svg` prop으로 바로
+넘겨 맵 조회·동적 import 없이 동기 렌더할 수 있다.
 ```js
 import { arrowLeft, checkCircle } from '@impact7/ui/icons/named';
 el.innerHTML = `<svg viewBox="0 0 256 256" width="20" fill="currentColor">${arrowLeft}</svg>`;
+```
+```jsx
+import { arrowLeft } from '@impact7/ui/icons/named';
+import { Icon } from '@impact7/ui';
+
+<Icon svg={arrowLeft} />
 ```
 - 이름은 camelCase 식별자(`arrow-left`·`arrowLeft` 둘 다 `arrowLeft`로 수렴). JS 예약어·숫자 시작
   슬러그는 `_` 프리픽스(`export`→`_export`, `function`→`_function`, `package`→`_package`).
